@@ -1,0 +1,4 @@
+include README.rst
+recursive-include docs  *
+recursive-include openapp_indivo/adminsite/templates *
+recursive-include openapp_indivo/adminsite/static *

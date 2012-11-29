@@ -1,0 +1,39 @@
+{% extends "admin/change_form.html" %}
+{% block object-tools %}
+{{ block.super }}
+<style>
+#content-main {
+    position: relative;
+}
+#sidebar-panel {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border-left: 1px solid #DDDDDD;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom:0;
+    width: 160px;
+    z-index: 1000;
+}
+#content-main form {
+    margin-right: 170px;
+}
+
+</style>
+<div id="sidebar-panel" class="module">
+<h2>{% if adminform.form.sidebar_name %}{{adminform.form.sidebar_name|safe}}{% else %}Sidebar{% endif %}</h2>
+{{ adminform.form.sidebar|safe }}
+</div>
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<br clear="both" style="clear:both" />
+<div style="border:1px solid #999;margin-top:10px;padding:10px;background-color:#EEE;">
+    <h3>Test File Import</h3>
+    <p><a href="/admin/import_document/?record_id={{original.id}}">Click here</a> to upload a document to this Record. <b>Please note 
+        that this feature is for testing only. The upload is not audited.</b>
+    </p>
+</div>
+{% endblock %}
