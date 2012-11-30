@@ -65,6 +65,8 @@ class AccountAdmin(DefaultModelAdmin):
             sidebar += ['<a href="%s?owner__id__exact=%s">Records</a>' % (record_url, obj.id)]
             carenet_url = urlresolvers.reverse('admin:indivo_carenetaccount_changelist')
             sidebar += ['<a href="%s?account=%s">Carenets</a>' % (carenet_url, obj.id)]
+            auth_url = urlresolvers.reverse('admin:indivo_accountauthsystem_changelist')
+            sidebar += ['<a href="%s?account=%s">Authentications</a>' % (auth_url, obj.id)]
         form.sidebar = "<br/>".join(sidebar)
         return form
 
@@ -267,7 +269,7 @@ admin.site.register(indivo_models.DocumentSchema, DocumentSchemaAdmin)
 #-------------------------------------------------------------------------
 # This is configured via a django management command. Prevent editing via admin.
 class PHAAdmin(DefaultModelAdmin):
-    list_display = ('description', 'type', 'email', 'author')
+    list_display = ('description', 'type', 'email', 'author', 'version')
     readonly_fields = ('id', 'creator', 'email', 'type', 'consumer_key', 'secret', 'name', 'description', 'author',
             'version', 'indivo_version', 'callback_url', 'start_url_template', 'is_autonomous', 'autonomous_reason',
             'has_ui', 'frameable', 'icon_url', 'requirements')
@@ -327,6 +329,10 @@ class FactAdmin(DefaultModelAdmin):
     form = FactAdminForm
 
 admin.site.register(indivo_models.Fact, FactAdmin)
+#-------------------------------------------------------------------------
+class MachineAppModelAdmin(DefaultModelAdmin):
+    list_display = ('description', 'type', 'email', 'author', 'version')
+admin.site.register(indivo_models.MachineApp, MachineAppModelAdmin)
 #-------------------------------------------------------------------------
 class CarenetModelAdmin(DefaultModelAdmin):
     list_display = ('id', 'name', 'record')
@@ -472,16 +478,19 @@ admin.site.register(indivo_models.SimpleClinicalNote, SimpleClinicalNoteModelAdm
 class VitalSignsModelAdmin(FactModelAdmin):
     list_display = ('date', ) + FactModelAdmin.list_display
 admin.site.register(indivo_models.VitalSigns, VitalSignsModelAdmin)
+#-------------------------------------------------------------------------
+class AccountAuthModelAdmin(DefaultModelAdmin):
+    list_display = ('username', 'account', 'auth_system')
+    list_filter = ('auth_system__short_name',)
+admin.site.register(indivo_models.AccountAuthSystem, AccountAuthModelAdmin)
 
 #--[ non-customised models ]----------------------------------------------
-admin.site.register(indivo_models.AccountAuthSystem, DefaultModelAdmin)
 admin.site.register(indivo_models.AccountFullShare, DefaultModelAdmin)
 admin.site.register(indivo_models.AuthSystem, DefaultModelAdmin)
 admin.site.register(indivo_models.CarenetAutoshare, DefaultModelAdmin)
 admin.site.register(indivo_models.CarenetDocument, DefaultModelAdmin)
 admin.site.register(indivo_models.CarenetPHA, DefaultModelAdmin)
 admin.site.register(indivo_models.DocumentRels, DefaultModelAdmin)
-admin.site.register(indivo_models.MachineApp, DefaultModelAdmin)
 admin.site.register(indivo_models.Message, DefaultModelAdmin)
 admin.site.register(indivo_models.MessageAttachment, DefaultModelAdmin)
 admin.site.register(indivo_models.Notification, DefaultModelAdmin)

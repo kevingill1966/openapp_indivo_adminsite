@@ -2,18 +2,25 @@
 {% load i18n admin_static %}
 
 {% block content %}
-<div id="content-main">
+<div id="content-main" style="width:700px">
+
+<div style="border:2px solid #E00;margin:10px 0;padding:10px;background-color:#EAA;">
+    <h3>Indivo Administrative Interface</h3>
+    <p><b>This interface is intended for development and experimentation only. It bypasses
+    the Indivo Security features, so do not use in a production environment.</b>
+    </p>
+</div>
 
 <!--
     Logical View of Indivo Data Model
 -->
-<table style="width:700px">
+<table style="width:100%; border:2px solid #333; margin:0" border="1" cellspacing="0">
 <tr>
 <td valign="top" style="font-size:14px; line-height:17px;" width="25%">
 <h3>Medical Data</h3>
 <b><a href="/admin/indivo/record">Records</a></b>
 <hr/>
-<a href="/admin/indivo/demographic">Demographic Data</a>
+<a href="/admin/indivo/demographics">Demographic Data</a>
 <a href="/admin/indivo/document">Documents</a>
 <hr/>
 <a href="/admin/indivo/allergy/">Allergys</a><br>
@@ -29,7 +36,7 @@
 <a href="/admin/indivo/procedure/">Procedures</a><br>
 <a href="/admin/indivo/simpleclinicalnote/">Simple Clinical Notes</a><br>
 <a href="/admin/indivo/vitalsigns/">Vital Signs</a>
-<td>
+</td>
 <td valign="top" style="font-size:14px; line-height:17px;" width="25%">
 <h3>Sharing and Security</h3>
 <b><a href="/admin/indivo/account/">Accounts</a></b><br/>
@@ -63,7 +70,7 @@
 </table>
 
 <br clear="both" style="clear:both" />
-<div style="border:1px solid #999;margin-top:10px;padding:10px;background-color:#EEE;">
+<div style="border:1px solid #999;margin:10px 0;padding:10px;background-color:#EEE;">
     <h3>Test File Import</h3>
     <p><a href="/admin/import_document/?record_id={{original.id}}">Click here</a> to upload a document to this Record. <b>Please note 
         that this feature is for testing only. The upload is not audited.</b>
