@@ -10,6 +10,10 @@ I have implemented an AdminSite.
 The Site is of interest for comprehending how the Record is connected. Start with
 a Record and work your way around.
 
+For further information on Indivo, visit::
+
+    http://indivohealth.org/
+
 Installation
 ------------
 
@@ -125,3 +129,12 @@ Integration of the Document Revision History and the Django Revision History.
 Integration of the Audit Trail and the Django Revision History.
 
 More configuration of changelist views.
+
+Licence
+-------
+
+This code is distributed under GPLv3. This is for consistency with Indivo, which
+is also distributed under that licence.
+
+    http://www.gnu.org/licenses/gpl-3.0-standalone.html
+
