@@ -109,8 +109,8 @@ You can access this url from your browser using:
 
     http://localhost:10000/admin/
 
-TODO
-----
+Short-comings
+-------------
 
 After upload of a document, display the status and provide a hyperlink to go to the
 document. Allow user to provide more fields.
@@ -127,8 +127,6 @@ Support for Django 1.3.X. Currently index.html is coded to support 1.4 only.
 Integration of the Document Revision History and the Django Revision History.
 
 Integration of the Audit Trail and the Django Revision History.
-
-More configuration of changelist views.
 
 Licence
 -------
