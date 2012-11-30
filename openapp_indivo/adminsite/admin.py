@@ -67,6 +67,10 @@ class AccountAdmin(DefaultModelAdmin):
             sidebar += ['<a href="%s?account=%s">Carenets</a>' % (carenet_url, obj.id)]
             auth_url = urlresolvers.reverse('admin:indivo_accountauthsystem_changelist')
             sidebar += ['<a href="%s?account=%s">Authentications</a>' % (auth_url, obj.id)]
+            messages_url = urlresolvers.reverse('admin:indivo_message_changelist')
+            sidebar += ['<a href="%s?account=%s">Messages</a>' % (messages_url, obj.id)]
+            messages_url = urlresolvers.reverse('admin:indivo_notification_changelist')
+            sidebar += ['<a href="%s?account=%s">Notifications</a>' % (messages_url, obj.id)]
         form.sidebar = "<br/>".join(sidebar)
         return form
 
@@ -132,6 +136,10 @@ class RecordAdmin(DefaultModelAdmin):
             vitalsigns_url = urlresolvers.reverse('admin:indivo_vitalsigns_changelist')
             sidebar += ['<a href="%s?record__id__exact=%s">Vital Signs</a>' % (vitalsigns_url, obj.id)]
 
+            messages_url = urlresolvers.reverse('admin:indivo_message_changelist')
+            sidebar += ['<h3>Communications</h3><a href="%s?about_record=%s">Messages</a>' % (messages_url, obj.id)]
+            messages_url = urlresolvers.reverse('admin:indivo_notification_changelist')
+            sidebar += ['<a href="%s?record=%s">Notifications</a>' % (messages_url, obj.id)]
         form.sidebar = '<br/>'.join(sidebar)
         return form
 
@@ -482,17 +490,78 @@ admin.site.register(indivo_models.VitalSigns, VitalSignsModelAdmin)
 class AccountAuthModelAdmin(DefaultModelAdmin):
     list_display = ('username', 'account', 'auth_system')
     list_filter = ('auth_system__short_name',)
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(AccountAuthModelAdmin, self).get_form(request, obj, **kwargs)
+        form.sidebar_name = "Links"
+        sidebar = []
+        if obj and obj.account_id:
+            url = urlresolvers.reverse('admin:indivo_account_change', args=(obj.account_id,))
+            sidebar += ['<a href="%s">Account</a>' % url]
+            url = urlresolvers.reverse('admin:indivo_authsystem_change', args=(obj.auth_system_id,))
+            sidebar += ['<a href="%s">Auth System</a>' % url]
+        form.sidebar = "<br/>".join(sidebar)
+        return form
+
 admin.site.register(indivo_models.AccountAuthSystem, AccountAuthModelAdmin)
+
+class AuthModelAdmin(DefaultModelAdmin):
+    list_display = ('short_name',)
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(AuthModelAdmin, self).get_form(request, obj, **kwargs)
+        form.sidebar_name = "Links"
+        sidebar = []
+        if obj:
+            url = urlresolvers.reverse('admin:indivo_accountauthsystem_changelist')
+            sidebar += ['<a href="%s?auth_system=%s">Authorised Accounts</a>' % (url, obj.id)]
+        form.sidebar = "<br/>".join(sidebar)
+        return form
+
+admin.site.register(indivo_models.AuthSystem, AuthModelAdmin)
+#-------------------------------------------------------------------------
+class MessageModelAdmin(DefaultModelAdmin):
+    list_display = ('created_at',  'sender', 'recipient', 'subject', 'severity')
+    list_filter = ('severity',)
+    search_fields = ('subject',)
+    readonly_fields = 'id','created_at'
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(MessageModelAdmin, self).get_form(request, obj, **kwargs)
+        form.sidebar_name = "Links"
+        sidebar = []
+        if obj:
+            url = urlresolvers.reverse('admin:indivo_messageattachment_changelist')
+            sidebar += ['<a href="%s?message=%s">Attachments</a>' % (url, obj.id)]
+            if obj.account_id:
+                url = urlresolvers.reverse('admin:indivo_account_change', args=(obj.account_id,))
+                sidebar += ['<a href="%s">Account</a>' % url]
+            if obj.about_record_id:
+                url = urlresolvers.reverse('admin:indivo_record_change', args=(obj.about_record_id,))
+                sidebar += ['<a href="%s">About Record</a>' % url]
+        form.sidebar = "<br/>".join(sidebar)
+        return form
+
+admin.site.register(indivo_models.Message, MessageModelAdmin)
+
+class MessageAttachementModelAdmin(DefaultModelAdmin):
+    list_display = ('message', 'type', 'size')
+    readonly_fields = 'id','created_at'
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(MessageAttachementModelAdmin, self).get_form(request, obj, **kwargs)
+        form.sidebar_name = "Links"
+        sidebar = []
+        if obj:
+            url = urlresolvers.reverse('admin:indivo_message_change', args=(obj.message_id,))
+            sidebar += ['<a href="%s">Message</a>' % (url)]
+        form.sidebar = "<br/>".join(sidebar)
+        return form
+
+admin.site.register(indivo_models.MessageAttachment, MessageAttachementModelAdmin)
 
 #--[ non-customised models ]----------------------------------------------
 admin.site.register(indivo_models.AccountFullShare, DefaultModelAdmin)
-admin.site.register(indivo_models.AuthSystem, DefaultModelAdmin)
 admin.site.register(indivo_models.CarenetAutoshare, DefaultModelAdmin)
 admin.site.register(indivo_models.CarenetDocument, DefaultModelAdmin)
 admin.site.register(indivo_models.CarenetPHA, DefaultModelAdmin)
 admin.site.register(indivo_models.DocumentRels, DefaultModelAdmin)
-admin.site.register(indivo_models.Message, DefaultModelAdmin)
-admin.site.register(indivo_models.MessageAttachment, DefaultModelAdmin)
 admin.site.register(indivo_models.Notification, DefaultModelAdmin)
 admin.site.register(indivo_models.NoUser, DefaultModelAdmin)
 admin.site.register(indivo_models.PHAShare, DefaultModelAdmin)

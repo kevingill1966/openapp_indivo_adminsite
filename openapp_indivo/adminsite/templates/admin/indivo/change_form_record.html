@@ -15,9 +15,20 @@
     bottom:0;
     width: 160px;
     z-index: 1000;
+    min-height:400px;
+    padding-left:5px;
+    overflow: auto;
 }
 #content-main form {
     margin-right: 170px;
+}
+#sidebar-panel h2 {
+    margin-left:-5px;
+}
+#sidebar-panel h3 {
+    font-size: 12px;
+    margin: 0.6em 0 0 0;
+    padding: 0px;
 }
 
 </style>
@@ -30,7 +41,7 @@
 {% block content %}
 {{ block.super }}
 <br clear="both" style="clear:both" />
-<div style="border:1px solid #999;margin-top:10px;padding:10px;background-color:#EEE;">
+<div style="border:1px solid #999;margin-top:10px;padding:10px;background-color:#EEE;margin-right: 170px;">
     <h3>Test File Import</h3>
     <p><a href="/admin/import_document/?record_id={{original.id}}">Click here</a> to upload a document to this Record. <b>Please note 
         that this feature is for testing only. The upload is not audited.</b>
