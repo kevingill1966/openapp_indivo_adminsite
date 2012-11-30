@@ -17,7 +17,7 @@ Make sure you are in the correct virtualenv environment::
 
     . python/bin/activate  (or similar)
 
-If you are running, Django 1.4 we recommend using admin_enhancer ::
+If you are running Django 1.4, we recommend using admin_enhancer ::
 
     pip install django-admin-enhancer
 
@@ -25,7 +25,7 @@ Install the package::
 
     pip install openapp_indivo_adminsite
 
-You need to create a separate settings file for the admin site, in the indivo_server
+You need to create a separate settings file, for the admin site, in the indivo_server
 directory. This settings file is intended only to run the admin site. Call this 
 file settings_admin.py. Include the following code::
 
@@ -109,7 +109,7 @@ TODO
 ----
 
 After upload of a document, display the status and provide a hyperlink to go to the
-document.
+document. Allow user to provide more fields.
 
 On the document view, provide links to facts contained in the document only.
 
@@ -118,13 +118,10 @@ function with any volume of data.
 
 All changelists require search configuration for dealing with volumes of data.
 
-New index.html.
-
-Support for Django 1.3.X.
-
-Package and Release.
+Support for Django 1.3.X. Currently index.html is coded to support 1.4 only.
 
 Integration of the Document Revision History and the Django Revision History.
 
-Integration of the Audit Trail and the Djanog Revision History.
+Integration of the Audit Trail and the Django Revision History.
 
+More configuration of changelist views.

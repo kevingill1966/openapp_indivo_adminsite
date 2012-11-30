@@ -1,0 +1,80 @@
+{% extends "admin/index_django14.html" %}
+{% load i18n admin_static %}
+
+{% block content %}
+<div id="content-main">
+
+<!--
+    Logical View of Indivo Data Model
+-->
+<table style="width:700px">
+<tr>
+<td valign="top" style="font-size:14px; line-height:17px;" width="25%">
+<h3>Medical Data</h3>
+<b><a href="/admin/indivo/record">Records</a></b>
+<hr/>
+<a href="/admin/indivo/demographic">Demographic Data</a>
+<a href="/admin/indivo/document">Documents</a>
+<hr/>
+<a href="/admin/indivo/allergy/">Allergys</a><br>
+<a href="/admin/indivo/allergyexclusion/">Allergys Exclusions</a><br>
+<a href="/admin/indivo/encounter/">Encounters</a><br>
+<a href="/admin/indivo/equipment/">Equipment</a><br>
+<a href="/admin/indivo/immunization/">Immunizations</a><br>
+<a href="/admin/indivo/labresult/">Lab Results</a><br>
+<a href="/admin/indivo/measurement/">Measurements</a><br>
+<a href="/admin/indivo/medication/">Medications</a><br>
+&nbsp;&nbsp;<a href="/admin/indivo/fill/">Fills</a><br>
+<a href="/admin/indivo/problem/">Problems</a><br>
+<a href="/admin/indivo/procedure/">Procedures</a><br>
+<a href="/admin/indivo/simpleclinicalnote/">Simple Clinical Notes</a><br>
+<a href="/admin/indivo/vitalsigns/">Vital Signs</a>
+<td>
+<td valign="top" style="font-size:14px; line-height:17px;" width="25%">
+<h3>Sharing and Security</h3>
+<b><a href="/admin/indivo/account/">Accounts</a></b><br/>
+<hr/>
+<a href="/admin/indivo/carenet/">Carenets</a><br/>
+<a href="/admin/indivo/carenetautoshare/">Carenet Autoshares</a><br/>
+<a href="/admin/indivo/carenetpha/">Carenet PHAs</a><br/>
+<a href="/admin/indivo/carenetdocument/">Carenet Documents</a><br/>
+<a href="/admin/indivo/phashare/">PHA Shares</a><br/>
+<hr/>
+<a href="/admin/indivo/audit">Audit Trail</a>
+</td>
+<td valign="top" style="font-size:14px; line-height:17px;" width="25%">
+<h3>Configuration</h3>
+<a href="/admin/indivo/accountauthsystem/">Account Auth Systems</a><br/>
+<a href="/admin/indivo/authsystem/">Auth Systems</a><br/>
+<b><a href="/admin/codingsystems/codedvalue/">Coded Values</a></b><br/>
+<a href="/admin/codingsystems/codingsystem/">Coding Systems</a><br/>
+<b><a href="/admin/indivo/documentschema/">Document Schemas</a></b><br/>
+<a href="/admin/indivo/machineapp/">Machine Apps</a><br/>
+<a href="/admin/indivo/pha/">PHAs</a><br/>
+<a href="/admin/indivo/statusname/">Status Names</a><br/>
+</td>
+
+<td valign="top" style="font-size:14px; line-height:17px;" width="25%">
+<h3>Other</h3>
+<a href="/admin/indivo/message/">Email Message</a><br/>
+<a href="/admin/indivo/notification/">Notifications</a><br/>
+</td>
+</tr>
+</table>
+
+<br clear="both" style="clear:both" />
+<div style="border:1px solid #999;margin-top:10px;padding:10px;background-color:#EEE;">
+    <h3>Test File Import</h3>
+    <p><a href="/admin/import_document/?record_id={{original.id}}">Click here</a> to upload a document to this Record. <b>Please note 
+        that this feature is for testing only. The upload is not audited.</b>
+    </p>
+</div>
+
+<h2>All Data Models</h2>
+{{ block.super }}
+{% endblock %}
+
+
+{% block sidebar %}
+<!-- Sidebar is not relevant - we don't track changes via Django logic -->
+{% endblock %}
