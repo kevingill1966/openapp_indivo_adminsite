@@ -1,8 +1,10 @@
-Introduction
-============
+Indivo Django Admin Site
+========================
 
-* THIS IS A DEVELOPERS TOOL. DO NOT USE IT IN AN ENVIRONMENT WITH LIVE MEDICAL DATA.
-THIS TOOL BY-PASSES THE INDIVO SECURITY *
+.. highlights::
+
+    THIS IS A DEVELOPERS TOOL. DO NOT USE IT IN AN ENVIRONMENT WITH LIVE MEDICAL DATA.
+    THIS TOOL BY-PASSES THE INDIVO SECURITY
 
 Indivo does not have a Django Admin Site. This tool is very useful for developers.
 I have implemented an AdminSite.
@@ -13,6 +15,11 @@ a Record and work your way around.
 For further information on Indivo, visit::
 
     http://indivohealth.org/
+
+Screenshot
+----------
+
+.. image:: https://raw.github.com/kevingill1966/openapp_indivo_adminsite/master/docs/images/screenshot1.png
 
 Installation
 ------------
@@ -31,7 +38,9 @@ Install the package::
 
 You need to create a separate settings file, for the admin site, in the indivo_server
 directory. This settings file is intended only to run the admin site. Call this 
-file settings_admin.py. Include the following code::
+file settings_admin.py. Include the following code.
+
+.. code::
 
 
     # This configuration is for the Indivo admin site - it uses the standard
