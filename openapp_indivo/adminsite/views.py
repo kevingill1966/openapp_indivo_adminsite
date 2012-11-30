@@ -38,5 +38,5 @@ def import_document(request):
         record_id = request.GET.get('record_id')
         form = ImportForm({'record_id': record_id}) 
 
-    return render(request, 'indivo_server_admin/import_document.html', {'form': form})
+    return render(request, 'openapp_indivo_adminsite/import_document.html', {'form': form})
 

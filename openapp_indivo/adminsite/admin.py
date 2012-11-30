@@ -7,7 +7,10 @@ from django import forms
 from django.utils.html import escape
 from django.conf.urls.defaults import patterns
 
-from admin_enhancer.admin import EnhancedModelAdminMixin
+try:
+    from admin_enhancer.admin import EnhancedModelAdminMixin
+except:
+    EnhancedModelAdminMixin = object
 
 from indivo_server.indivo import models as indivo_models
 from indivo_server.codingsystems import models as coding_models

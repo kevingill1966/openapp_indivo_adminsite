@@ -1,7 +1,14 @@
-from django.conf.urls.defaults import *
 
-# URL patterns for openapp_indivo_adminsite
+# Currently, this server will only provide the admin interface. Do not
+# include the standard indivo server urls.
 
-urlpatterns = patterns('openapp_indivo_adminsite.views',
-  # Add url patterns here
+from django.conf.urls.defaults import patterns, include, url
+
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
+
