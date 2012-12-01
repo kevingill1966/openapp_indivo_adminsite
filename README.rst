@@ -46,6 +46,8 @@ file settings_admin.py. Include the following code.
     # This configuration is for the Indivo admin site - it uses the standard
     # settings, but replaces a middleware to allow the Django Authentication
     # system to work.
+
+    import os.path
     from settings import *
 
 
@@ -98,6 +100,11 @@ file settings_admin.py. Include the following code.
         INSTALLED_APPS += 'admin_enhancer',
     except:
         pass
+
+    import openapp_indivo.adminsite
+    ADMINSITE_ROOT_DIR = os.path.dirname(openapp_indivo.adminsite.__file__)
+    TEMPLATE_DIRS = (ADMINSITE_ROOT_DIR + '/templates/',) + TEMPLATE_DIRS
+
 
 Sync your database to create tables required to support admin.::
 
